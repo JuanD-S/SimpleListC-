@@ -82,6 +82,15 @@ public:
         delete nodeToDelete;
     }
 
+    bool exists(T value) {
+        Node<T>* temp = head;
+        while (temp) {
+            if (temp->getData() == value) return true;
+            temp = temp->getNext();
+        }
+        return false;
+    }
+
     void showList() {
         Node<T>* temp = head;
         while (temp) {
