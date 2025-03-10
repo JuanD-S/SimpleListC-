@@ -60,6 +60,28 @@ public:
         temp->setNext(nullptr);
     }
 
+    void removeAt(int position) {
+        if (!head || position < 0) return;
+    
+        if (position == 0) {
+            Node<T>* temp = head;
+            head = head->getNext();
+            delete temp;
+            return;
+        }
+    
+        Node<T>* temp = head;
+        for (int i = 0; temp->getNext() && i < position - 1; i++) {
+            temp = temp->getNext();
+        }
+    
+        if (!temp->getNext()) return;
+    
+        Node<T>* nodeToDelete = temp->getNext();
+        temp->setNext(nodeToDelete->getNext());
+        delete nodeToDelete;
+    }
+
     void showList() {
         Node<T>* temp = head;
         while (temp) {
