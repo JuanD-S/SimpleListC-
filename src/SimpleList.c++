@@ -66,6 +66,30 @@ public:
         return value;
     }
 
+    void remove(T value) {
+        if (!head){
+            throw std::runtime_error("La lista está vacía");
+        }
+    
+        if (head->getData() == value) {
+            Node<T>* temp = head;
+            head = head->getNext();
+            delete temp;
+            return;
+        }
+    
+        Node<T>* temp = head;
+        while (temp->getNext() && temp->getNext()->getData() != value) {
+            temp = temp->getNext();
+        }
+    
+        if (!temp->getNext()) return;
+    
+        Node<T>* nodeToDelete = temp->getNext();
+        temp->setNext(nodeToDelete->getNext());
+        delete nodeToDelete;
+    }
+    
     T removeAt(int position) {
         if (!head || position < 0){
             throw std::runtime_error("Posicion invalida o lista vacia");
