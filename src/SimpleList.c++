@@ -66,16 +66,17 @@ public:
         return value;
     }
 
-    void remove(T value) {
+    T remove(T value) {
         if (!head){
             throw std::runtime_error("La lista está vacía");
         }
     
         if (head->getData() == value) {
             Node<T>* temp = head;
+            T removedValue = head->getData();
             head = head->getNext();
             delete temp;
-            return;
+            return removedValue;
         }
     
         Node<T>* temp = head;
@@ -83,11 +84,15 @@ public:
             temp = temp->getNext();
         }
     
-        if (!temp->getNext()) return;
+        if (!temp->getNext()) {
+            throw std::runtime_error("El valor no existe en la lista");
+        }
     
         Node<T>* nodeToDelete = temp->getNext();
+        T removedValue = nodeToDelete->getData();
         temp->setNext(nodeToDelete->getNext());
         delete nodeToDelete;
+        return removedValue;
     }
     
     T removeAt(int position) {
