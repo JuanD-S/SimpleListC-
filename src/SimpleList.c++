@@ -96,6 +96,15 @@ public:
         return value;
     }
 
+    T get(int index) {
+        Node<T>* temp = head;
+        for (int i = 0; temp && i < index; i++) {
+            temp = temp->getNext();
+        }
+        return temp ? temp->getData() : T();  
+    }
+    
+
     bool exists(T value) {
         Node<T>* temp = head;
         while (temp) {
