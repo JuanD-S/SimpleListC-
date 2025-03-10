@@ -42,6 +42,24 @@ public:
         }
     }
 
+    void pull() {
+        if (!head) return;
+    
+        if (!head->getNext()) {
+            delete head;
+            head = nullptr;
+            return;
+        }
+    
+        Node<T>* temp = head;
+        while (temp->getNext()->getNext()) {
+            temp = temp->getNext();
+        }
+    
+        delete temp->getNext();
+        temp->setNext(nullptr);
+    }
+
     void showList() {
         Node<T>* temp = head;
         while (temp) {
