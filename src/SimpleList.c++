@@ -42,32 +42,41 @@ public:
         }
     }
 
-    void pull() {
-        if (!head) return;
+    T pull() {
+        if (!head){
+            throw std::runtime_error("La lista está vacía");
+        }
     
         if (!head->getNext()) {
+            T value = head->getData();
             delete head;
             head = nullptr;
-            return;
+            return value;
         }
     
         Node<T>* temp = head;
         while (temp->getNext()->getNext()) {
             temp = temp->getNext();
         }
-    
+        
+        T value = temp->getNext()->getData();
         delete temp->getNext();
         temp->setNext(nullptr);
+
+        return value;
     }
 
-    void removeAt(int position) {
-        if (!head || position < 0) return;
+    T removeAt(int position) {
+        if (!head || position < 0){
+            throw std::runtime_error("Posicion invalida o lista vacia");
+        }
     
         if (position == 0) {
             Node<T>* temp = head;
+            T value = temp->getData();
             head = head->getNext();
             delete temp;
-            return;
+            return value;
         }
     
         Node<T>* temp = head;
@@ -75,11 +84,16 @@ public:
             temp = temp->getNext();
         }
     
-        if (!temp->getNext()) return;
+        if (!temp->getNext()){
+            throw std::runtime_error("Posición fuera de rango.");
+        }
     
         Node<T>* nodeToDelete = temp->getNext();
+        T value = nodeToDelete->getData();
         temp->setNext(nodeToDelete->getNext());
         delete nodeToDelete;
+
+        return value;
     }
 
     bool exists(T value) {

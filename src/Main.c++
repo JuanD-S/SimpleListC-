@@ -11,10 +11,19 @@ int main() {
     list.push(30);
     list.push(40);
 
-    cout << "Lista actual:" << endl;
+    cout << "\nLista actual:" << endl;
     list.showList();
-    cout << "\n" << list.size() << endl;
-    cout << "\n" << list.isEmpty() << endl;
+    cout << "\nsize: " << list.size() << endl;
+    cout << "La lista esta vacia?: " << list.isEmpty() << endl;
+
+    cout << "Ultimo dato eliminado: " << list.pull() << endl;
+    list.showList();
+    cout << "\nsize: " << list.size() << endl;
+
+    cout << "\ndato eliminado: " << list.removeAt(1) << endl;
+    list.showList();
+    cout << "\nEste dato existe?: " << list.exists(30) << endl;
+
 
     return 0;
 }
